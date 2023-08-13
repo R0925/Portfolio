@@ -33,7 +33,7 @@ function App() {
     inputRef.current.click();
   }
   return (
-    <div className="p-12 relative ">
+    <div className=" relative ">
       <Navbar />
 
       <div className=" absolute h-full flex items-center top-[-20px] right-10 z-10">
@@ -57,7 +57,7 @@ function App() {
           {window.location.href.includes("footer") ? (
             <a
               href="#hero"
-              className="text-gray-400 -rotate-90 text-sm font-semibold absolute right-[-36px] bottom-[-250px] w-28 flex justify-start items-center group transition-all duration-500 hover:text-gray-300 opacity-80"
+              className="text-gray-400 -rotate-90 text-sm font-semibold absolute right-[-36px] bottom-[-200px] w-28 flex justify-start items-center group transition-all duration-500 hover:text-gray-300 opacity-80"
             >
               Back To Top
               <FaChevronRight className="ml-2 transition-all duration-500 group-hover:translate-x-5 text-white" />
@@ -65,7 +65,7 @@ function App() {
           ) : (
             <a
               onClick={simulateClick}
-              className="text-gray-400 -rotate-90 text-sm font-semibold absolute right-[-36px] bottom-[-250px] w-28 flex justify-start items-center group transition-all duration-500 hover:text-gray-300 cursor-pointer opacity-80"
+              className="text-gray-400 -rotate-90 text-sm font-semibold absolute right-[-36px] bottom-[-200px] w-28 flex justify-start items-center group transition-all duration-500 hover:text-gray-300 cursor-pointer opacity-80"
             >
               <FaChevronLeft className="mr-2 transition-all duration-500 group-hover:-translate-x-5 text-white" />
               Scroll Down
@@ -77,6 +77,7 @@ function App() {
       <ReactFullpage
         afterLoad={() => handleScroll(window.location.href.split("#")[1])}
         scrollingSpeed={1000}
+        responsiveWidth= {1000}
         anchors={anchors}
         render={({ state, fullpageApi }) => {
           return (

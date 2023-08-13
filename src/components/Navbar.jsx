@@ -2,7 +2,7 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <div className="flex justify-between items-center text-white">
+    <div className="flex justify-between items-center text-white p-12">
       <div>
         <a href="">
           <h1 className=" text-4xl font-bold tracking-widest ">DVLPR</h1>
