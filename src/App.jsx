@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import ReactFullpage from "@fullpage/react-fullpage";
 
 import Navbar from "./components/Navbar";
@@ -7,13 +7,19 @@ import About from "./components/About";
 import Skills from "./components/Skills";
 import Portfolio from "./components/Portfolio";
 import Footer from "./components/Footer";
-import { useState } from "react";
+
 import { FaChevronLeft } from "react-icons/fa";
 import { FaChevronRight } from "react-icons/fa";
 
 function App() {
   const inputRef = useRef(null);
+  const rightInputRef = useRef(null);
+  const leftInputRef = useRef(null);
+
   const anchors = ["hero", "about", "skills", "portfolio", "footer"];
+
+  const [slideIndexS, setslideIndexS] = useState(0);
+  var sliding = false;
 
   const [activeMenu, setActiveMenu] = useState("");
 
@@ -32,11 +38,20 @@ function App() {
   function simulateClick() {
     inputRef.current.click();
   }
+
+  function simulateSlideRight() {
+    rightInputRef.current.click();
+    console.log("click right");
+  }
+  function simulateSlideLeft() {
+    leftInputRef.current.click();
+    console.log("click left");
+  }
   return (
-    <div className=" relative ">
+    <div className=" relative  ">
       <Navbar />
 
-      <div className=" absolute h-full flex items-center top-[-20px] right-10 z-10">
+      <div className=" fixed h-full items-center top-[-20px] right-10 z-10 hidden lg:flex">
         <nav className="relative flex flex-col items-center border-r border-[#ffffff50]">
           {anchors.map((item, index) => {
             return (
@@ -75,9 +90,29 @@ function App() {
       </div>
 
       <ReactFullpage
+        afterSlideLoad={(section, origin, destination, direction) =>
+          setslideIndexS((prev) => destination.index + 1)
+        }
+        onLeave={(origin, destination, direction) => {
+          console.log(
+            "Index: " + origin.index + " Slide Index: " + slideIndexS
+          );
+
+          if (origin.index === 3 && !sliding) {
+            if (direction === "down" && slideIndexS < 3) {
+              simulateSlideRight();
+              return false;
+            } else if (direction === "up" && slideIndexS > 1) {
+              simulateSlideLeft();
+              return false;
+            }
+          } else if (sliding) {
+            return false;
+          }
+        }}
         afterLoad={() => handleScroll(window.location.href.split("#")[1])}
         scrollingSpeed={1000}
-        responsiveWidth= {1000}
+        responsiveWidth={1024}
         anchors={anchors}
         render={({ state, fullpageApi }) => {
           return (
@@ -98,6 +133,17 @@ function App() {
               </div>
               <div className="section">
                 <Portfolio />
+                <button
+                    ref={rightInputRef}
+                    onClick={() => fullpageApi.moveSlideRight()}
+                    className=" hidden"
+                  ></button>
+                  <button
+                    ref={leftInputRef}
+                    onClick={() => fullpageApi.moveSlideLeft()}
+                    className=" hidden"
+                  ></button>
+          
               </div>
               <div className="section">
                 <Footer />

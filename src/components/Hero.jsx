@@ -17,7 +17,7 @@ const Hero = () => {
   };
 
   return (
-    <div className=" flex md:flex-row flex-col-reverse w-[1400px] max-w-full m-auto p-10">
+    <div className=" flex lg:flex-row flex-col-reverse w-[1400px] max-w-full overflow-hidden m-auto p-10">
       <img
         src={dotPattern}
         className=" absolute top-0 bottom-0 rotate-90 m-auto right-[-50px] -z-10"
@@ -27,9 +27,9 @@ const Hero = () => {
         className=" absolute  bottom-[20px] right-0 left-[-350px] m-auto my-0 max-w-[200px] opacity-70"
       />
 
-      <div className=" flex flex-col justify-center w-1/2">
-        <h1 className="text-white lg:text-6xl lg:leading-[0.9] text-5xl  font-bold flex  gap-5  ">
-          <div>
+      <div className=" flex flex-col justify-center lg:w-1/2  md:w-2/3">
+        <h1 className="text-white lg:text-6xl lg:leading-[0.9] text-5xl  font-bold flex flex-col  gap-5  ">
+          <div className="flex gap-5">
             <div className="flex ">
               <div className=" transition-all inline-block hover:text-[#f4a949] hover:animate-rubberBand">
                 F
@@ -131,9 +131,8 @@ const Hero = () => {
       </div>
 
       <div className="md:w-1/2">
-        <Lottie options={defaultOptions} height={'100%'} width={'100%'} />
+        <Lottie options={defaultOptions} height={"100%"} width={"100%"} />
       </div>
-
     </div>
   );
 };
